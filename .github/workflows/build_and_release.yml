@@ -131,22 +131,6 @@ jobs:
           archives: ${{ matrix.job.qt_archives }}
           modules: ${{ matrix.job.qt_modules }}
 
-      - name: Install Ninja (Windows)
-        if: ${{ startsWith(matrix.job.runner, 'windows') }}
-        run: |
-          if ((Get-Command "ninja.exe" -ErrorAction SilentlyContinue) -eq $null)
-          {
-             choco install ninja
-          }
-
-      - name: Install Ninja (macOS)
-        if: ${{ startsWith(matrix.job.runner, 'macos') }}
-        env:
-          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-          HOMEBREW_NO_INSTALL_CLEANUP: 1
-        run: |
-          brew install ninja
-
       - name: Set up MSVC environment (Windows)
         uses: ilammy/msvc-dev-cmd@v1
         if: ${{ matrix.job.win_arch }}
