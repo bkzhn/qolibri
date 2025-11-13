@@ -6,8 +6,6 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Minimum macOS version
-set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "macOS deployment target")
 # Visual Studio: Enable parallel builds
 add_compile_options($<$<CXX_COMPILER_ID:MSVC>:/MP>)
 # Visual Studio: UTF-8 source and execution encoding, invalid UTF-8 in sources is an error
@@ -183,6 +181,9 @@ endif ()
 if (APPLE)
     set_source_files_properties(images/qolibri.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
     set(MACOSX_BUNDLE_ICON_FILE qolibri.icns)
+    if(CMAKE_OSX_DEPLOYMENT_TARGET)
+        set(QOLIBRI_MACOS_MINIMUM_SYSTEM_VERSION "\n\t<key>LSMinimumSystemVersion</key>\n\t<string>${CMAKE_OSX_DEPLOYMENT_TARGET}</string>")
+    endif()
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in" "${CMAKE_CURRENT_BINARY_DIR}/Info.plist" @ONLY)
     set_target_properties(qolibri PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_BINARY_DIR}/Info.plist")
 endif()
