@@ -145,6 +145,7 @@ void MainWindow::createMenus()
                                bookView, SLOT(stopSearch()), Qt::Key_Escape);
     stopAct->setEnabled(false);
     exitAct = fmenu->addAction(tr("E&xit"), this, SLOT(close()), tr("Ctrl+Q"));
+    exitAct->setMenuRole(QAction::QuitRole);
     CONNECT_BUSY(exitAct);
 
     QMenu *emenu = menuBar()->addMenu(tr("&Edit"));
