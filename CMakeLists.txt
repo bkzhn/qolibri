@@ -199,7 +199,7 @@ endif()
 
 # Link translations into the binary
 configure_file(translations/translations.qrc "${CMAKE_CURRENT_BINARY_DIR}/translations/translations.qrc" COPYONLY)
-set(TS_FILES translations/qolibri_ja_JP.ts)
+set(TS_FILES translations/qolibri_ja.ts)
 set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations")
 qt_add_translation(QM_FILES ${TS_FILES})
 target_sources(qolibri PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/translations/translations.qrc" ${QM_FILES} ${TS_FILES})
