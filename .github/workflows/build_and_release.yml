@@ -215,6 +215,11 @@ jobs:
           volname='qolibri_${{ steps.env.outputs.version }}_${{ matrix.job.target }}'
           cd build
           macdeployqt qolibri.app
+
+          # https://qt-project.atlassian.net/browse/QTBUG-18662
+          mkdir -p qolibri.app/Contents/translations
+          cp "$(qmake -query QT_INSTALL_TRANSLATIONS)"/qt*_ja.qm qolibri.app/Contents/translations/
+
           mkdir bin
           mv qolibri.app bin/
           if [ '${{ matrix.job.macos11_arch }}' ]; then
